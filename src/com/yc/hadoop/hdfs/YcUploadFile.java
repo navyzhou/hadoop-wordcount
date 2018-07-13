@@ -19,6 +19,7 @@ public class YcUploadFile {
 			URI uri = new URI("hdfs://192.168.30.130:9000/");   // 连接资源位置
 			fs = FileSystem.get(uri, conf); // 创建文件系统实例对象
 			
+			// 创建文件夹  hadoop fs -mkdir -p /user/navy
 			Path uploadPath = new Path("/user/navy/"); // 上传文件保存的目录
 		
 			

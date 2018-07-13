@@ -93,13 +93,18 @@ public class YcWordCount {
 		 * 报错 java.lang.UnsatisfiedLinkError: org.apache.hadoop.io.nativeio.NativeIO$Windows.access0(Ljava/lang/String;I)Z
 		 * 请查看报错文档
 		 */
+		// FileInputFormat.addInputPath(job, new Path("hdfs://192.168.30.130:9000/user/navy/yc.txt"));
+		FileInputFormat.addInputPath(job, new Path("hdfs://192.168.30.130:9000/user/navy/*"));
 		
-		FileInputFormat.addInputPath(job, new Path("hdfs://192.168.30.130:9000/user/navy/yc.txt"));
-		
-		// 查看hdfs上的文件和目录  hadoop fs ls /
+		// 查看hdfs上的文件和目录  hadoop fs -ls /
 		// 删除目录 hadoop fs -rm -r /<目录名>
 		// 查看统计信息  hadoop fs -cat wordcount/part-r-00000
 		FileOutputFormat.setOutputPath(job, new Path("hdfs://192.168.30.130:9000/user/navy/wordcount"));
-		System.exit(job.waitForCompletion(true) ? 0 : 1);
+		boolean bl = job.waitForCompletion(true);
+		if (bl) {
+			System.out.println("统计完成...");
+		} else {
+			System.out.println("统计失败...");
+		}
 	}
 }
